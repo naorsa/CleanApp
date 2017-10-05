@@ -50,14 +50,23 @@ class UserProfile(models.Model):
 class BillImge(models.Model):
     pub_date = models.DateField(auto_now_add=True)
     name = models.CharField(max_length=200,default=None)
-    image = ProcessedImageField(upload_to='bills/%Y/%m/%d/',blank=True, null=True,format='JPEG',options={'quality': 60})
+    image = ProcessedImageField(upload_to='bills/%Y/%m/%d/',blank=True, null=True,format='JPEG',options={'optimize':True,'quality': 60})
     notes = models.CharField(max_length=2000,default=None)
 
 
-
-
-
-
-
-
-
+class WeekArrangeMorning(models.Model):
+    city = models.ForeignKey(CityModel, on_delete=models.CASCADE)
+    day1m = models.CharField(max_length=200)
+    day2m = models.CharField(max_length=200)
+    day3m = models.CharField(max_length=200)
+    day4m = models.CharField(max_length=200)
+    day5m = models.CharField(max_length=200)
+    day6m = models.CharField(max_length=200)
+    day7m = models.CharField(max_length=200)
+    day1e = models.CharField(max_length=200)
+    day2e = models.CharField(max_length=200)
+    day3e = models.CharField(max_length=200)
+    day4e = models.CharField(max_length=200)
+    day5e = models.CharField(max_length=200)
+    day6e = models.CharField(max_length=200)
+    day7e = models.CharField(max_length=200)

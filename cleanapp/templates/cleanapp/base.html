@@ -10,29 +10,43 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="jumbotron text-left">
-<img src="{% static 'Asset 1@2x.png'%}" class="img-responsive" alt="Responsive image">
-</div>
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="{% url 'cleanapp:logout' %}">התנתק</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="{% url 'cleanapp:mainMenu' %}">בית</a></li>
-      <li><a href="{% url 'cleanapp:questions' %}">מלא דוח</a></li>
-      <li><a href="{% url 'cleanapp:display_report' %}">צפיה בדוח</a></li>
-      <li><a href="{% url 'cleanapp:add_bill' %}">העלה חשבונית</a></li>
-      <li><a href="{% url 'cleanapp:display_bill' %}">צפיה בחשבוניות</a></li>
-    </ul>
-  </div>
-</nav>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container">
-  {% block questions %}{% endblock %}
-    {% block bill %}{% endblock %}
-    {% block display_report %}{% endblock %}
+     <div class="col-md-3">
+        <a href="{% url 'cleanapp:questions' %}" class="btn btn-block btn-lg btn-default">
+            <i style="font-size: 4em;" class="glyphicon glyphicon-list-alt" id="icone_grande"></i> <br><br>
+            <span class="texto_grande"><i class="fa fa-edit"></i> הכנס דוח</span></a>
+      </div>
+      <div class="col-md-3">
+        <a href="{% url 'cleanapp:display_report' %}" class="btn btn-block btn-lg btn-default">
+            <i style="font-size: 4em;" class="glyphicon glyphicon-list-alt" id="icone_grande"></i> <br><br>
+            <span class="texto_grande"><i class="fa fa-eye"></i> צפה בדוח</span></a>
+      </div>
+      <div class="col-md-3">
+        <a href="{% url 'cleanapp:add_bill' %}" class="btn btn-block btn-lg btn-default">
+            <i style="font-size: 4em;" class="fa fa-camera" id="icone_grande"></i> <br><br>
+            <span class="texto_grande"><i class="fa fa-edit"></i> הכנס חשבונית</span></a>
+      </div>
+         <div class="col-md-3">
+        <a href="{% url 'cleanapp:display_bill' %}" class="btn btn-block btn-lg btn-default">
+            <i style="font-size: 4em;" class="fa fa-camera" id="icone_grande"></i> <br><br>
+            <span class="texto_grande"><i class="fa fa-eye"></i> צפה בחשבונית</span></a>
+      </div>
 
+    <div class="col-md-3">
+        <a href="{% url 'cleanapp:work_schedule' %}" class="btn btn-block btn-lg btn-default">
+            <i style="font-size: 4em;" class="fa fa-calendar" id="icone_grande"></i> <br><br>
+            <span class="texto_grande"><i class="fa fa-edit"></i>  הכנס סידור עבודה</span></a>
+      </div>
+    <div class="col-md-3">
+        <a href="{% url 'cleanapp:work_schedule_display' %}" class="btn btn-block btn-lg btn-default">
+            <i style="font-size: 4em;" class="fa fa-calendar" id="icone_grande"></i> <br><br>
+            <span class="texto_grande"><i class="fa fa-eye"></i>  צפה בסידור עבודה</span></a>
+      </div>
+
+</div>
 </div>
 </body>
 </html>
+
 

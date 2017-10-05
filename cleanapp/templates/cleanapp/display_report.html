@@ -1,5 +1,4 @@
 <html lang="he">
-{% extends "cleanapp/base.html" %}
 {% load staticfiles %}
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +8,8 @@
 </head>
 {% block display_report %}
 <body>
+<a href="{% url 'cleanapp:mainMenu' %}" class="btn btn-block btn-lg btn-default">
+  <i style="position: fixed; left: 0px; font-size: 2em;" class="glyphicon glyphicon-home"></i> <br><br> </a>
   <div class="text-right">
     <form method="post">
     {% csrf_token %}

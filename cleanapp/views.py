@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import CityModel, Question, Title, Reports,UserProfile,BillImge
-from .forms import CloseAnsware, UserForm,UploadBill, ChooseBill, ChooseBillName
+from .models import CityModel, Question, Title, Reports,UserProfile,BillImge,WeekArrangeMorning
+from .forms import CloseAnsware, UserForm,UploadBill, ChooseBill, ChooseBillName,SendMessageForm, SidurAvudaFormMorning
 from django.forms import modelformset_factory
 from django.http import HttpResponseRedirect,Http404,HttpResponse
 from django.core.urlresolvers import reverse
@@ -36,6 +36,7 @@ def mainMenu(request):
 
 @login_required
 def questions(request):
+    sendMessage = SendMessageForm()
     title = Title.objects.order_by('id')
     FormSet = modelformset_factory(Question, form=CloseAnsware)
     questionFormSet = FormSet()
@@ -50,12 +51,10 @@ def questions(request):
         questionFormSet = FormSet(request.POST, request.FILES)
         if questionFormSet.is_valid():
             ans_list = []
-            image_list = []
             for form in questionFormSet[:-1]:
                 ans = form.cleaned_data['answare']
                 ans_list.append(ans)
                 image = form.cleaned_data['image']
-                image_list.append(image)
                 questionFormSet.save()
             count = 0
             question = Question.objects.all()
@@ -63,7 +62,7 @@ def questions(request):
             imagesdict = {}
             for q in question:
                 qid = str(q.id)
-                img = str(q.image)
+                img = 'media/'+str(q.image)
                 qansdict[qid] = ans_list[count]
                 imagesdict[qid] = img
                 count=count+1
@@ -75,7 +74,7 @@ def questions(request):
             report.save()
             clean_question()
             return HttpResponseRedirect(reverse('cleanapp:report', args=[reportid]))
-    context = {'questionFormSet': questionFormSet, 'title': title }
+    context = {'questionFormSet': questionFormSet, 'title': title,'sendMessage':sendMessage }
     return render(request, 'cleanapp/print.html', context)
 
 @login_required
@@ -122,5 +121,28 @@ def display_bill_name(request, date):
 
 
     else:
+        bills = BillImge.objects.filter(pub_date=date)
         form = ChooseBillName(date,BillImge)
-    return render(request, 'cleanapp/display_bill.html', {"form": form})
+    return render(request, 'cleanapp/display_bill.html', {"form": form,"bills":bills})
+
+
+def work_schedule(request):
+    if request.method == 'POST':
+        userid = request.user.id
+        user = UserProfile.objects.get(user_id=userid)
+        city_ref = CityModel.objects.get(userprofile=user)
+        MorningInstance = WeekArrangeMorning.objects.get(city__id=city_ref.id)
+        form = SidurAvudaFormMorning(instance=MorningInstance, data=request.POST)
+        if form.is_valid():
+            MorningInstance = form.save()
+    else:
+        form = SidurAvudaFormMorning()
+    return render(request, 'cleanapp/work_schedule.html', {"form":form})
+
+
+def work_schedule_display(request):
+    userid = request.user.id
+    user = UserProfile.objects.get(user_id=userid)
+    city_ref = CityModel.objects.get(userprofile=user)
+    MorningInstance = WeekArrangeMorning.objects.get(city__id=city_ref.id)
+    return render(request, 'cleanapp/work_schedule_display.html', {"form": MorningInstance})

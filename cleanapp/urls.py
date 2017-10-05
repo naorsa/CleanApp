@@ -11,5 +11,8 @@ urlpatterns = [
     url(r'^/add_bill$', views.add_bill, name='add_bill'),
     url(r'^/display_bill$', views.display_bill, name='display_bill'),
     url(r'^/(?P<date>\d{4}-\d{2}-\d{2})/$', views.display_bill_name, name='display_bill_name'),
+    url(r'^/work_schedule/$', views.work_schedule, name='work_schedule'),
+    url(r'^/work_schedule_display/$', views.work_schedule_display, name='work_schedule_display'),
+
 ]
 

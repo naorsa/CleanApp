@@ -1,5 +1,4 @@
 <html lang="he">
-{% extends "cleanapp/base.html" %}
 {% load staticfiles %}
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,3 +18,11 @@
 </body>
 {% endblock %}
 </html>
+{% for bill in bills %}
+<div class="col-lg-4">
+     <div class="thumbnail">
+      <img src={{ bill.image.url }}>
+     </div>
+</div>
+{% endfor %}
+

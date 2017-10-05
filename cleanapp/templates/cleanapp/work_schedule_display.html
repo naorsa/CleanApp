@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load staticfiles %}
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="table-responsive">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+          <th>יום</th>
+          <th>בוקר</th>
+          <th>ערב</th>
+      </tr>
+    </thead>
+        <tbody>
+            <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <tr>
+      <th scope="row">ראשון</th>
+        <th>{{ form.day1m }}</th>
+        <th>{{ form.day1e }}</th>
+        <tr>
+        <th scope="row">שני</th>
+            <th>{{ form.day2m }}</th>
+            <th>{{ form.day2e }}</th>
+
+              <tr>
+        <th scope="row">שלישי</th>
+            <th>{{ form.day3m }}</th>
+                <th>{{ form.day3e }}</th>
+              <tr>
+        <th scope="row">רביעי</th>
+            <th>{{ form.day4m }}</th>
+                <th>{{ form.day4e }}</th>
+
+                    <tr>
+        <th scope="row">חמישי</th>
+            <th>{{ form.day5m }}</th>
+                <th>{{ form.day5e }}</th>
+
+                    <tr>
+        <th scope="row">שישי</th>
+            <th>{{ form.day6m }}</th>
+                <th>{{ form.day6e }}</th>
+
+                    <tr>
+        <th scope="row">שבת</th>
+              <th>{{ form.day7m }}</th>
+                    <th>{{ form.day7e }}</th>
+  </table>
+     </div>
+        <div class="text-center"><button type="submit">שלח דו"ח</button></div>
+</div>
+</body>
+</html>
